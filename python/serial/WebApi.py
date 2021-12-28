@@ -1,10 +1,8 @@
-import math
 import random
 import datetime as dt
 
 import requests
 import json
-from TimeUtil import TimeUtil
 
 class WebApi:
     url = 'http://localhost:8080'
@@ -158,119 +156,6 @@ class WebApi:
                 json=measureDataDtos
             )
             print(response)
-
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
-
-    @classmethod
-    def getDatas(cls):
-        headers = {'Authorization': 'Bearer ' + cls.token}
-
-        date = dt.datetime.now()
-        date += dt.timedelta(days=-1)
-
-        start = TimeUtil.startOfDay(date).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-        end = TimeUtil.endOfDay(date).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-
-        query = {
-            'from': start,
-            'to': end
-        }
-
-        dataLoggerId = cls.dataLoggerList[0]
-
-        response = requests.get(
-            cls.url + '/measureData/' + str(dataLoggerId),
-            headers=headers,
-            params=query
-        )
-        jstr = response.text
-        json_data = json.loads(jstr)
-        print(json_data)
-
-    @classmethod
-    def getDatasAndUpload(cls):
-        try:
-            headers = {'Authorization': 'Bearer ' + cls.token}
-
-            date = dt.datetime.now()
-            date += dt.timedelta(days=-1)
-
-            start = TimeUtil.startOfDay(date).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-            end = TimeUtil.endOfDay(date).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-
-            query = {
-                'from': start,
-                'to': end
-            }
-
-            dataLoggerId = cls.dataLoggerList[0]
-
-            response = requests.get(
-                cls.url + '/measureData/' + str(dataLoggerId),
-                headers=headers,
-                params=query
-            )
-            jstr = response.text
-            json_data = json.loads(jstr)
-            print(json_data)
-            count = int(json_data["count"])
-            datas = json_data["data"]
-            datas = datas[::-1]
-            print(datas)
-            addList = []
-            if count < 24:
-                for i in range(0, count - 1):
-                    j = 1
-                    while True:
-                        date = dt.datetime.strptime(datas[i]["time"], "%Y-%m-%dT%H:%M:%S.%f")
-                        time = int(date.timestamp()) + (3600 * j)
-                        nextDate = dt.datetime.strptime(datas[i+1]["time"], "%Y-%m-%dT%H:%M:%S.%f")
-                        nextTime = int(nextDate.timestamp())
-                        if nextTime == time:
-                            break
-                        else:
-                            j += 1
-                            t = dt.datetime.fromtimestamp(time).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-                            addList.append({
-                                'data': datas[i]["data"],
-                                'time': t
-                            })
-
-                end = TimeUtil.endOfDay(date).timestamp()
-                time = dt.datetime.strptime(datas[count-1]["time"], "%Y-%m-%dT%H:%M:%S.%f").timestamp()
-
-                while True:
-                    j = 1
-                    time += 3600 * j
-                    if end < time:
-                        break
-                    else:
-                        j += 1
-                        t = dt.datetime.fromtimestamp(time).strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-                        addList.append({
-                            'data': datas[count-1]["data"],
-                            'time': t
-                        })
-
-                print(addList)
-                response = requests.post(
-                    cls.url + '/measureData/' + str(dataLoggerId),
-                    headers=headers,
-                    json=addList
-                )
-                print(response.text)
-
-            # for data in json_data["data"]:
-            #     date = dt.datetime.strptime(data["time"], "%Y-%m-%dT%H:%M:%S.%f")
-            #     time = int(date.timestamp())
-            #     print(data["data"], time)
 
         except requests.exceptions.HTTPError as errh:
             print(errh)
