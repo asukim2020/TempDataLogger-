@@ -22,7 +22,7 @@ class SerialManager:
     def start(self):
         self.exitMeasureThread = True
 
-        # api.login()
+        api.login()
         # api.getDataLoggerList()
 
         if self.ser is None:
