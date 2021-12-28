@@ -167,39 +167,39 @@ class WebApi:
         except requests.exceptions.RequestException as err:
             print(err)
 
-    @classmethod
-    def uploadDatas(cls, dataLoggerId):
-        try:
-            headers = {'Authorization': 'Bearer ' + cls.token}
-            measureDataDtos = []
-            datas = []
-            now = dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
-            for i in range(0, 3):
-                data = str(int(random.random() * 30))
-                datas.append(data)
-            dataString = ','.join(datas)
-            print(dataString)
-
-            measureDataDtos.append({
-                'data': dataString,
-                'time': now
-            })
-            print(measureDataDtos)
-            response = requests.post(
-                cls.url + '/measureData/' + str(dataLoggerId),
-                headers=headers,
-                json=measureDataDtos
-            )
-            print(response)
-
-        except requests.exceptions.HTTPError as errh:
-            print(errh)
-        except requests.exceptions.ConnectionError as errc:
-            print(errc)
-        except requests.exceptions.Timeout as errt:
-            print(errt)
-        except requests.exceptions.RequestException as err:
-            print(err)
+    # @classmethod
+    # def uploadDatas(cls, dataLoggerId):
+    #     try:
+    #         headers = {'Authorization': 'Bearer ' + cls.token}
+    #         measureDataDtos = []
+    #         datas = []
+    #         now = dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")[0:23]
+    #         for i in range(0, 3):
+    #             data = str(int(random.random() * 30))
+    #             datas.append(data)
+    #         dataString = ','.join(datas)
+    #         print(dataString)
+    #
+    #         measureDataDtos.append({
+    #             'data': dataString,
+    #             'time': now
+    #         })
+    #         print(measureDataDtos)
+    #         response = requests.post(
+    #             cls.url + '/measureData/' + str(dataLoggerId),
+    #             headers=headers,
+    #             json=measureDataDtos
+    #         )
+    #         print(response)
+    #
+    #     except requests.exceptions.HTTPError as errh:
+    #         print(errh)
+    #     except requests.exceptions.ConnectionError as errc:
+    #         print(errc)
+    #     except requests.exceptions.Timeout as errt:
+    #         print(errt)
+    #     except requests.exceptions.RequestException as err:
+    #         print(err)
 
 
 if __name__ == "__main__":
