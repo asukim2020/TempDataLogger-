@@ -6,7 +6,7 @@ from python.serial.WebApi import WebApi as api
 
 
 class SerialManager:
-    port = "/dev/ttyS0"
+    port = "/dev/ttyS1"
     # port = "COM4"
     baud = 38400
     min = TimeUtil.checkAMin()
