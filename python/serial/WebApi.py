@@ -6,7 +6,7 @@ import json
 
 class WebApi:
     # url = 'http://localhost:8080'
-    url = 'https://mutiscanback.link/'
+    url = 'http://mutiscanback.link:8080/'
     companyId = -1
     token = ""
     dataLoggerList = []
