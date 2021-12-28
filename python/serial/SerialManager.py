@@ -22,12 +22,10 @@ class SerialManager:
     def start(self):
         self.exitMeasureThread = True
 
-        api.login()
-        api.getDataLoggerList()
+        # api.login()
+        # api.getDataLoggerList()
 
         if self.ser is None:
-            # WebApi.login()
-            # WebApi.getDataLoggerList()
             self.ser = serial.Serial(SerialManager.port, SerialManager.baud, timeout=0)
             self.ser.write(b"*S$")
 
