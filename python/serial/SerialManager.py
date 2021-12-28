@@ -2,8 +2,6 @@ import serial
 import threading
 
 from python.serial.TimeUtil import TimeUtil
-from python.serial.WebApi import WebApi as api
-
 
 class SerialManager:
     port = "/dev/ttyUSB0"
@@ -21,9 +19,6 @@ class SerialManager:
 
     def start(self):
         self.exitMeasureThread = True
-
-        api.login()
-        # api.getDataLoggerList()
 
         if self.ser is None:
             self.ser = serial.Serial(SerialManager.port, SerialManager.baud, timeout=0)

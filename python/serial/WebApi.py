@@ -40,7 +40,6 @@ class WebApi:
 
     @classmethod
     def login(cls):
-        print("login start")
         try:
             user = {
                 'username': 'test',
@@ -53,9 +52,9 @@ class WebApi:
             )
             jstr = response.text
             print(jstr)
-            # json_data = json.loads(jstr)
-            # cls.token = json_data['jwtToken']
-            # cls.companyId = json_data['companyId']
+            json_data = json.loads(jstr)
+            cls.token = json_data['jwtToken']
+            cls.companyId = json_data['companyId']
 
         except requests.exceptions.HTTPError as errh:
             print(errh)
@@ -65,8 +64,6 @@ class WebApi:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
-
-        print("login end")
 
     @classmethod
     def createDataLogger(cls):
