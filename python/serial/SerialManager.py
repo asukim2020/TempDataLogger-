@@ -42,37 +42,37 @@ class SerialManager:
                     if self.min < min or (self.min == 59 and min == 0):
                         print(min)
 
-                        tmp = ''.join(self.line)
-                        tmp = tmp.replace("+", " , ")
-                        tmp = tmp.replace("-", " , -")
-                        tmp = tmp.replace("*", "")
-                        tmp = tmp.replace("$", "")
-                        print(tmp)
+                    tmp = ''.join(self.line)
+                    tmp = tmp.replace("+", " , ")
+                    tmp = tmp.replace("-", " , -")
+                    tmp = tmp.replace("*", "")
+                    tmp = tmp.replace("$", "")
+                    print(tmp)
 
-                        datas = tmp.split()
+                    datas = tmp.split()
 
-                        dataString = ''
-                        firstFlag = False
-                        for idx, val in enumerate(datas):
-                            try:
-                                data = float(val)
-                                data *= 0.1
+                    dataString = ''
+                    firstFlag = False
+                    for idx, val in enumerate(datas):
+                        try:
+                            data = float(val)
+                            data *= 0.1
 
-                                if firstFlag:
-                                   dataString += ','
+                            if firstFlag:
+                               dataString += ','
 
-                                dataString += "{:.1f}".format(data)
+                            dataString += "{:.1f}".format(data)
 
-                                if not firstFlag:
-                                    firstFlag = True
+                            if not firstFlag:
+                                firstFlag = True
 
-                            except:
-                                continue
+                        except:
+                            continue
 
-                        print(dataString)
+                    print(dataString)
                         # api.uploadDatas(dataString)
 
-                        self.min = min
+                        # self.min = min
 
                     self.line.clear()
 
