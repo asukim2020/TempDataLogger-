@@ -40,6 +40,7 @@ class WebApi:
 
     @classmethod
     def login(cls):
+        print("login start")
         try:
             user = {
                 'username': 'test',
@@ -64,6 +65,8 @@ class WebApi:
             print(errt)
         except requests.exceptions.RequestException as err:
             print(err)
+
+        print("login end")
 
     @classmethod
     def createDataLogger(cls):
