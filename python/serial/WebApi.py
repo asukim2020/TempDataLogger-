@@ -6,7 +6,7 @@ import json
 
 class WebApi:
     # url = 'http://localhost:8080'
-    url = 'http://mutiscanback.link:8080/'
+    url = 'https://mutiscanback.link'
     companyId = -1
     token = ""
     dataLoggerList = []
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     api.getDataLoggerList()
     # api.updateDataLogger()
 
-    api.uploadDatas(31.1)
+    # api.uploadDatas(31.1)
 
     # api.getDatas()
     # api.getDatasAndUpload()
