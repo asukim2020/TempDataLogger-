@@ -2,6 +2,7 @@ import serial
 import threading
 
 from python.serial.TimeUtil import TimeUtil
+from python.serial.WebApi import WebApi as api
 
 class SerialManager:
     port = "/dev/ttyUSB0"
@@ -18,6 +19,9 @@ class SerialManager:
         self.exitMeasureThread = False
 
     def start(self):
+        api.login()
+        api.getDataLoggerList()
+
         self.exitMeasureThread = True
 
         if self.ser is None:
@@ -65,7 +69,7 @@ class SerialManager:
                                 continue
 
                         print(dataString)
-                        # api.uploadDatas(dataString)
+                        api.uploadDatas(dataString)
 
                         self.min = min
 
