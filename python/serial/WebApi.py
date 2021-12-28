@@ -51,6 +51,7 @@ class WebApi:
                 json=user
             )
             jstr = response.text
+            print("jstr: ", end=" ")
             print(jstr)
             json_data = json.loads(jstr)
             cls.token = json_data['jwtToken']
