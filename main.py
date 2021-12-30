@@ -50,13 +50,16 @@ if __name__ == "__main__":
     app.tk.attributes("-fullscreen", True)
     # app.full_screen = True
 
+    def exit_full_screen():
+        app.exit_full_screen()
+
     # create the matrix of buttons
     for y in range(4):
         # create a box which spans the width of the app
         button_box = Box(app, align="top", width="fill")
         for z in range(4):
             # put 3 buttons in, aligned to the left edge, filling the available space
-            PushButton(button_box, align="left", width="fill")
+            PushButton(button_box, command=exit_full_screen, align="left", width="fill")
 
     # create a box for the buttons
     textboxes_box = Box(app, align="top", width="fill")
