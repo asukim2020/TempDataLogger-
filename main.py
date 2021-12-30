@@ -51,7 +51,7 @@ if __name__ == "__main__":
     # app.full_screen = True
 
     def exit_full_screen():
-        app.exit_full_screen()
+        app.destroy()
 
     # create the matrix of buttons
     for y in range(4):
