@@ -20,20 +20,20 @@ if __name__ == "__main__":
     # serial = SerialManager()
     # serial.start()
 
-    app = App(title="My second GUI app", width=300, height=200, layout="grid")
-
-    film_description = Text(app, text="Which film?", grid=[0, 0], align="left")
-    film_choice = Combo(app, options=["Star Wars", "Frozen", "Lion King"], grid=[1, 0], align="left")
-
-    film_description = Text(app, text="Seat type", grid=[0, 1], align="left")
-    vip_seat = CheckBox(app, text="VIP seat?", grid=[1, 1], align="left")
-
-    film_description = Text(app, text="Seat location", grid=[0, 2], align="left")
-    row_choice = ButtonGroup(app, options=[["Front", "F"], ["Middle", "M"], ["Back", "B"]], selected="M", horizontal=True, grid=[1, 2], align="left")
-
-    book_seats = PushButton(app, command=do_booking, text="Book seat", grid=[1, 3], align="left")
-
-    app.display()
+    # app = App(title="My second GUI app", width=300, height=200, layout="grid")
+    #
+    # film_description = Text(app, text="Which film?", grid=[0, 0], align="left")
+    # film_choice = Combo(app, options=["Star Wars", "Frozen", "Lion King"], grid=[1, 0], align="left")
+    #
+    # film_description = Text(app, text="Seat type", grid=[0, 1], align="left")
+    # vip_seat = CheckBox(app, text="VIP seat?", grid=[1, 1], align="left")
+    #
+    # film_description = Text(app, text="Seat location", grid=[0, 2], align="left")
+    # row_choice = ButtonGroup(app, options=[["Front", "F"], ["Middle", "M"], ["Back", "B"]], selected="M", horizontal=True, grid=[1, 2], align="left")
+    #
+    # book_seats = PushButton(app, command=do_booking, text="Book seat", grid=[1, 3], align="left")
+    #
+    # app.display()
 
     # app = App(title="Hello world")
     #
@@ -44,3 +44,22 @@ if __name__ == "__main__":
     #
     # app.display()
 
+    from guizero import App, Box, TextBox, PushButton
+
+    app = App(width=800, height=480)
+
+    # create the matrix of buttons
+    for y in range(4):
+        # create a box which spans the width of the app
+        button_box = Box(app, align="top", width="fill")
+        for z in range(4):
+            # put 3 buttons in, aligned to the left edge, filling the available space
+            PushButton(button_box, align="left", width="fill")
+
+    # create a box for the buttons
+    textboxes_box = Box(app, align="top", width="fill")
+
+    TextBox(textboxes_box, width="fill")
+    TextBox(textboxes_box, width="fill")
+
+    app.display()
