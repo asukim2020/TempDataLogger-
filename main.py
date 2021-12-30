@@ -1,5 +1,5 @@
 from python.serial.SerialManager import SerialManager
-from guizero import App, Text
+from guizero import App, Text, TextBox
 
 if __name__ == "__main__":
     import sys
@@ -12,5 +12,6 @@ if __name__ == "__main__":
     app = App(title="Hello world")
 
     welcome_message = Text(app, text="Welcome to my app")
+    my_name = TextBox(app)
 
     app.display()
