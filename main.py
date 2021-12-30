@@ -47,7 +47,7 @@ if __name__ == "__main__":
     from guizero import App, Box, TextBox, PushButton
 
     app = App()
-    app.set_full_screen()
+    app.full_screen = True
 
     # create the matrix of buttons
     for y in range(4):
