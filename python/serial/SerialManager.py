@@ -43,14 +43,14 @@ class SerialManager:
                 if c == 10:
                     min = TimeUtil.checkAMin()
                     if self.min < min or (self.min == 59 and min == 0):
-                        log(min)
+                        self.log(min)
 
                         tmp = ''.join(self.line)
                         tmp = tmp.replace("+", " , ")
                         tmp = tmp.replace("-", " , -")
                         tmp = tmp.replace("*", "")
                         tmp = tmp.replace("$", "")
-                        log(tmp)
+                        self.log(tmp)
 
                         datas = tmp.split(",")
 
@@ -83,7 +83,7 @@ class SerialManager:
                                 except:
                                     continue
 
-                        log(dataString)
+                        self.log(dataString)
                         # api.uploadDatas(dataString)
 
                         self.min = min
