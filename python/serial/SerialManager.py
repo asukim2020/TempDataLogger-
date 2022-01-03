@@ -99,10 +99,13 @@ class SerialManager:
             self.ser = None
 
     def log(self, text):
-        if self.app is not None:
-            self.app.children[4].children[0].append(text)
-        else:
-            print(text)
+        try:
+            if self.app is not None:
+                self.app.children[4].children[0].append(text)
+            else:
+                print(text)
+        except:
+            print("log error")
 
 # Test Code
 if __name__ == "__main__":
