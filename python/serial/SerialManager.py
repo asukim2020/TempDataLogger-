@@ -84,7 +84,7 @@ class SerialManager:
                                     continue
 
                         self.log(dataString)
-                        # api.uploadDatas(dataString)
+                        api.uploadDatas(dataString)
 
                         self.min = min
 
