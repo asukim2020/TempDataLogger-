@@ -64,7 +64,7 @@ if __name__ == "__main__":
     # create a box for the buttons
     textboxes_box = Box(app, align="top", width="fill")
 
-    TextBox(textboxes_box, width="fill")
-    TextBox(textboxes_box, width="fill")
+    TextBox(textboxes_box, width="fill", height="fill", multiline=True)
+    # TextBox(textboxes_box, width="fill")
 
     app.display()
