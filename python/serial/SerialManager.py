@@ -17,6 +17,10 @@ class SerialManager:
         self.ser = None
         self.line = []
         self.exitMeasureThread = False
+        self.app = None
+
+    def setApp(self, app):
+        self.app = app
 
     def start(self):
         api.login()
@@ -48,11 +52,11 @@ class SerialManager:
                         tmp = tmp.replace("$", "")
                         print(tmp)
 
-                        datas = tmp.split()
+                        datas = tmp.split(",")
 
                         dataString = ''
                         firstFlag = False
-                        for idx, val in enumerate(datas):
+                        for val in datas:
                             try:
                                 data = float(val)
                                 data *= 0.1
@@ -68,8 +72,19 @@ class SerialManager:
                             except:
                                 continue
 
+                        count = 4
+                        for i in range(0, count):
+                            for j in range(0, count):
+                                try:
+                                    idx = i * count + j + 1
+                                    data = float(datas[idx])
+                                    data *= 0.1
+                                    self.app.children[i].children[j].text = "CH" + str(idx) + ": " + "{:.1f}".format(data)
+                                except:
+                                    continue
+
                         print(dataString)
-                        api.uploadDatas(dataString)
+                        # api.uploadDatas(dataString)
 
                         self.min = min
 

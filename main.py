@@ -67,4 +67,9 @@ if __name__ == "__main__":
     TextBox(textboxes_box, width="fill", height="fill", multiline=True)
     # TextBox(textboxes_box, width="fill")
 
+    serial = SerialManager()
+    serial.setApp(app)
+    serial.start()
+
     app.display()
+
