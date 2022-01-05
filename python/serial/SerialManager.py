@@ -4,11 +4,13 @@ import threading
 from python.serial.TimeUtil import TimeUtil
 from python.serial.WebApi import WebApi as api
 
+
 class SerialManager:
     port = "/dev/ttyUSB0"
     # port = "COM4"
     baud = 38400
     min = TimeUtil.checkAMin()
+    loginCount = 0
 
     def __init__(self):
         super().__init__()
@@ -62,7 +64,7 @@ class SerialManager:
                                 data *= 0.1
 
                                 if firstFlag:
-                                   dataString += ','
+                                    dataString += ','
 
                                 dataString += "{:.1f}".format(data)
 
@@ -90,6 +92,11 @@ class SerialManager:
 
                     self.line.clear()
 
+                    SerialManager.loginCount += 1
+                    if SerialManager.loginCount >= 1440:
+                        api.login()
+                        SerialManager.loginCount = 0
+
     def end(self):
         self.exitMeasureThread = False
 
@@ -106,6 +113,7 @@ class SerialManager:
                 print(text)
         except:
             print("log error")
+
 
 # Test Code
 if __name__ == "__main__":
