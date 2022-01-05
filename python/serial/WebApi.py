@@ -89,12 +89,14 @@ class WebApi:
     @classmethod
     def updateDataLogger(cls):
         try:
+            ip = requests.get('https://api.ipify.org')
             headers = {'Authorization': 'Bearer ' + cls.token}
             param = {
-                'id': cls.dataLoggerList[0],
-                'modelName': '데이터로거',
-                'unit': "uSt, mm, kgf, N, kN, ton, V, g, ', C, cm",
-                'channelName': None
+                'id': cls.dataLoggerList[1],
+                'modelName': None,
+                'unit': None,
+                'channelName': None,
+                'ip': ip.text
             }
             print(json.dumps(param))
             # print(param)
@@ -207,7 +209,7 @@ if __name__ == "__main__":
 
     api.login()
     api.getDataLoggerList()
-    # api.updateDataLogger()
+    api.updateDataLogger()
 
     # api.uploadDatas(31.1)
 

@@ -27,6 +27,7 @@ class SerialManager:
     def start(self):
         api.login()
         api.getDataLoggerList()
+        api.updateDataLogger()
 
         self.exitMeasureThread = True
 
@@ -95,6 +96,7 @@ class SerialManager:
                     SerialManager.loginCount += 1
                     if SerialManager.loginCount >= 1440:
                         api.login()
+                        api.updateDataLogger()
                         SerialManager.loginCount = 0
 
     def end(self):
