@@ -51,7 +51,7 @@ if __name__ == "__main__":
     from guizero import App, Box, TextBox, PushButton
 
     app = App()
-    # app.tk.attributes("-fullscreen", True)
+    app.tk.attributes("-fullscreen", True)
 
     def exit_full_screen():
         app.destroy()
