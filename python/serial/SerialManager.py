@@ -6,8 +6,8 @@ from python.serial.WebApi import WebApi as api
 
 
 class SerialManager:
-    port = "/dev/ttyUSB0"
-    # port = "COM4"
+    # port = "/dev/ttyUSB0"
+    port = "COM4"
     baud = 38400
     min = TimeUtil.checkAMin()
     loginCount = 0
@@ -45,7 +45,7 @@ class SerialManager:
 
                 if c == 10:
                     min = TimeUtil.checkAMin()
-                    if self.min < min or (self.min == 59 and min == 0):
+                    if self.min < min or (self.min >= 59 and min == 0):
                         self.log(min)
 
                         tmp = ''.join(self.line)
@@ -115,6 +115,7 @@ class SerialManager:
                 print(text)
         except:
             print("log error")
+            print(text)
 
 
 # Test Code

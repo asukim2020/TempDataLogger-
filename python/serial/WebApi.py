@@ -5,7 +5,7 @@ import requests
 import json
 
 class WebApi:
-    # url = 'http://localhost:8080'
+    # url = 'http://172.30.1.102:8080'
     url = 'https://mutiscanback.link'
     companyId = -1
     token = ""
@@ -142,6 +142,43 @@ class WebApi:
             print(err)
 
     @classmethod
+    def select(cls):
+        from python.serial.TimeUtil import TimeUtil as tu
+
+        try:
+            headers = {'Authorization': 'Bearer ' + cls.token}
+            offset = dt.datetime.now()
+            print(offset)
+            start = tu.getNextDay(offset, -60).strftime("%Y-%m-%dT%H:%M:00.000")[0:23]
+            end = offset.strftime("%Y-%m-%dT%H:%M:00.000")[0:23]
+
+            param = {
+                'from': start,
+                'to': end,
+                'offset': 300,
+            }
+
+            print(param)
+
+            response = requests.get(
+                cls.url + '/measureData/download/' + str(cls.dataLoggerList[1]),
+                headers=headers,
+                params=param
+            )
+
+            print(response.text)
+
+        except requests.exceptions.HTTPError as errh:
+            print(errh)
+        except requests.exceptions.ConnectionError as errc:
+            print(errc)
+        except requests.exceptions.Timeout as errt:
+            print(errt)
+        except requests.exceptions.RequestException as err:
+            print(err)
+
+
+    @classmethod
     def uploadDatas(cls, data):
         try:
             headers = {'Authorization': 'Bearer ' + cls.token}
@@ -209,7 +246,8 @@ if __name__ == "__main__":
 
     api.login()
     api.getDataLoggerList()
-    api.updateDataLogger()
+    api.select()
+    # api.updateDataLogger()
 
     # api.uploadDatas(31.1)
 

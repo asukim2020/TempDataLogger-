@@ -45,9 +45,14 @@ class TimeUtil:
         dateString = ('%d-%d-%d' % (year, month, day))
         return dt.datetime.strptime(dateString, '%Y-%m-%d')
 
+    # @classmethod
+    # def getNextDay(cls, time, day):
+    #     date = TimeUtil.longToDate(time)
+    #     date += dt.timedelta(days=day)
+    #     return date
+
     @classmethod
-    def getNextDay(cls, time, day):
-        date = TimeUtil.longToDate(time)
+    def getNextDay(cls, date, day):
         date += dt.timedelta(days=day)
         return date
 
@@ -91,6 +96,12 @@ class TimeUtil:
 # test
 if __name__ == "__main__":
     # TimeUtil.checkAMin()
-    time = 1639062042063
-    print(TimeUtil.longToDate(time))
+    # time = 1639062042063
+    # print(TimeUtil.longToDate(time))
+
+    # date = TimeUtil.getNewDate()
+    # print(date)
+
+    t = time.time()
+    print(t)
 

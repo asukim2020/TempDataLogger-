@@ -44,31 +44,30 @@ if __name__ == "__main__":
     #
     # app.display()
 
-    from guizero import App, Box, TextBox, PushButton
 
-    app = App()
-    app.tk.attributes("-fullscreen", True)
-    # app.full_screen = True
 
-    def exit_full_screen():
-        app.destroy()
 
-    # create the matrix of buttons
-    for y in range(4):
-        # create a box which spans the width of the app
-        button_box = Box(app, align="top", width="fill")
-        for z in range(4):
-            # put 3 buttons in, aligned to the left edge, filling the available space
-            PushButton(button_box, command=exit_full_screen, align="left", width="fill")
 
-    # create a box for the buttons
-    textboxes_box = Box(app, align="top", width="fill")
-
-    TextBox(textboxes_box, width="fill", height="fill", multiline=True)
+    # from guizero import App, Box, TextBox, PushButton
+    #
+    # app = App()
+    # app.tk.attributes("-fullscreen", True)
+    #
+    # def exit_full_screen():
+    #     app.destroy()
+    #
+    # for y in range(4):
+    #     button_box = Box(app, align="top", width="fill")
+    #     for z in range(4):
+    #         PushButton(button_box, command=exit_full_screen, align="left", width="fill")
+    #
+    # textboxes_box = Box(app, align="top", width="fill")
+    #
+    # TextBox(textboxes_box, width="fill", height="fill", multiline=True)
 
     serial = SerialManager()
-    serial.setApp(app)
+    # serial.setApp(app)
     serial.start()
 
-    app.display()
+    # app.display()
 
